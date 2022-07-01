@@ -27,3 +27,4 @@ export const FUNC_TO_CALL = "store"
 export const PROPOSAL_DESCRIPTION = "Throw 77 into the Box!"
 
 export const proposalsFile = "proposals.json"
+export const PROPOSAL_INDEX = 0
