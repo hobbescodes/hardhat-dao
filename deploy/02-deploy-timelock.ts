@@ -2,7 +2,6 @@ import { HardhatRuntimeEnvironment } from "hardhat/types"
 import { DeployFunction } from "hardhat-deploy/types"
 import { developmentChains, MIN_DELAY, networkConfig } from "../hardhat-helper-config"
 import verify from "../utils/verify"
-import { ethers } from "hardhat"
 
 const deployTimeLock: DeployFunction = async (hre: HardhatRuntimeEnvironment) => {
     const { getNamedAccounts, deployments, network } = hre
@@ -23,8 +22,8 @@ const deployTimeLock: DeployFunction = async (hre: HardhatRuntimeEnvironment) =>
     })
     log(`Deployed TimeLock to ${timeLock.address}`)
 
-    if (!developmentChains.includes(network.name)) {
-        await verify(timeLock.address, [ethers.utils.parseUnits("1000000")])
+    if (!developmentChains.includes(network.name) && process.env.ETHERSCAN_API_KEY) {
+        await verify(timeLock.address, [])
     }
 }
 

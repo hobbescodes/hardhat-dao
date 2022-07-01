@@ -26,8 +26,8 @@ const deployGovernanceToken: DeployFunction = async (hre: HardhatRuntimeEnvironm
 
     await delegate(governanceToken.address, deployer)
 
-    if (!developmentChains.includes(network.name)) {
-        await verify(governanceToken.address, [ethers.utils.parseUnits("1000000")])
+    if (!developmentChains.includes(network.name) && process.env.ETHERSCAN_API_KEY) {
+        await verify(governanceToken.address, [])
     }
 }
 
